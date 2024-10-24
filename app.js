@@ -4,6 +4,10 @@ const cors = require("cors");
 
 const AppError = require("./src/utils/appError");
 const globalErrorHandler = require("./src/controllers/errorController");
+const BranchRouter = require("./src/Routers/BranchRoutes");
+const CategoryRouter = require("./src/Routers/CategoryRoutes");
+const InvoiceRouter = require("./src/Routers/InvoiceRoutes");
+const ProductRouter = require("./src/Routers/ProductRoutes");
 
 const app = express();
 app.use(cookieParser());
@@ -16,6 +20,11 @@ app.use(
         credentials: true,
     })
 );
+
+app.use("/api/v1/branch", BranchRouter);
+app.use("/api/v1/categories", CategoryRouter);
+app.use("/api/v1/invoice", InvoiceRouter);
+app.use("/api/v1/product", ProductRouter);
 
 app.get("/", (req, res) => {
     res.send("API is running...");
